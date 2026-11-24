@@ -1,0 +1,38 @@
+
+name: Instagram Reels Automation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  setup-runner:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Check FFmpeg
+        run: ffmpeg -version
+
+      - name: Check Python
+        run: python --version
+
+      - name: Setup Complete
+        run: |
+          echo "GitHub Runner is working!"
+          echo "FFmpeg is ready!"
+          echo "Python is ready!"
